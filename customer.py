@@ -1,5 +1,3 @@
-from order import Order
-
 class Customer:
     all_customers = []
 
@@ -19,16 +17,19 @@ class Customer:
             raise ValueError("Name must be a string between 1 and 15 characters.")
 
     def orders(self):
+        from order import Order  
         return [order for order in Order.all_orders if order.customer == self]
 
     def coffees(self):
         return list({order.coffee for order in self.orders()})
 
     def create_order(self, coffee, price):
+        from order import Order  
         return Order(self, coffee, price)
 
     @classmethod
     def most_aficionado(cls, coffee):
+        from order import Order  
         customer_totals = {}
         for order in Order.all_orders:
             if order.coffee == coffee:
